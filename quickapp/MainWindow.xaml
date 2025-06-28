@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -68,14 +68,12 @@
              VerticalContentAlignment="Center"
              Style="{StaticResource searh}"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="FilterButton" 
-            Content="Фильтр" 
-            Margin="5,5,0,0"
+            Content="Фильтр"
             Width="80"
-            Height="20"
-            Click="FilterButton_Click"
-            Style="{StaticResource ModernButtonStyle}"/>
+            Height="35"
+            Style="{StaticResource ModernButtonStyle}" Click="FilterButton_Click_1"/>
 
             <ListBox x:Name="FilterList"
             Grid.Column="2"
@@ -87,16 +85,24 @@
                 <ListBoxItem Content="По размеру"/>
             </ListBox>
         </StackPanel>
-        <StackPanel Grid.Row="2" x:Name="yes">
-            
+        <StackPanel  Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="5" x:Name="StackP1">
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="Update"
+                    Content="Обновить"
+                    Width="100"
+                    Height="35"
+                    Style="{StaticResource ModernButtonStyle}" Click="Update_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="7" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="AddApp"
                     Content="Добавить приложение"
                     Style="{StaticResource ModernButtonStyle}"
                     Width="180"
-                    Height="35"
+                    Height="35" Click="AddApp_Click"
                     />
         </StackPanel>
     </Grid>
+    
 </Window>
