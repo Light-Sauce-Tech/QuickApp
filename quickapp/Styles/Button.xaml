@@ -50,24 +50,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
-    
-    <Style x:Key="searh" TargetType="TextBox">
-        <Style.Triggers>
-            <Trigger Property="Text" Value="">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Center">
-                            <VisualBrush.Visual>
-                                <TextBlock Text="Поиск..." 
-                                               Foreground="#AAAAAA"
-                                               Margin="5,0,0,0"/>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 </ResourceDictionary>

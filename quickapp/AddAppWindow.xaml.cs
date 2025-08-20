@@ -30,10 +30,24 @@ namespace quickapp
         {
             string path = PathTextBox.Text;
 
-            if (File.Exists(path))
+            if (!File.Exists(path))
             {
-                string name = Path.GetFileNameWithoutExtension(path);
+                MessageBox.Show("Файл не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            // Проверяем, уже ли добавлено это приложение
+            var existingApps = GetAppList();
+            if (existingApps.Any(app => app.AppPath == path))
+            {
+                MessageBox.Show("Это приложение уже добавлено.", "Дубликат", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            string name = Path.GetFileNameWithoutExtension(path);
+
+            try
+            {
                 var icon = IconHelper.GetIconFromExe(path);
                 string iconPath = IconHelper.SaveIconToTemp(icon, name);
 
@@ -50,14 +64,22 @@ namespace quickapp
                 DialogResult = true;
                 Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Файл не найден.");
+                MessageBox.Show($"Не удалось извлечь иконку: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
         }
 
-        private void SaveAppToJson(AppItem app)
+        public static List<AppItem> GetAppList()
+        {
+            if (!File.Exists("apps.json"))
+                return new List<AppItem>();
+
+            string json = File.ReadAllText("apps.json");
+            return JsonSerializer.Deserialize<List<AppItem>>(json) ?? new List<AppItem>();
+        }
+
+        public static void SaveAppToJson(AppItem app)
         {
             List<AppItem> apps = new List<AppItem>();
 

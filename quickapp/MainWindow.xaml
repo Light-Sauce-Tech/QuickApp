@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:quickapp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="718" WindowStyle="ToolWindow">
+        MinHeight="560" MinWidth="700" Height="560" Width="700"  WindowStyle="ToolWindow"
+        SizeChanged="MainWindow_SizeChanged" ShowInTaskbar="False" Closing="Window_Closing">
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary1.xaml"/>
+                <ResourceDictionary Source="Styles/Button.xaml"/>
+                <ResourceDictionary Source="Styles/Search.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -66,9 +68,10 @@
              BorderThickness="1"
              BorderBrush="AliceBlue"
              VerticalContentAlignment="Center"
-             Style="{StaticResource searh}"/>
+             Style="{StaticResource searh}"
+             TextChanged="SearchTextBox_TextChanged"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="FilterButton" 
             Content="Фильтр"
             Width="80"
@@ -76,25 +79,36 @@
             Style="{StaticResource ModernButtonStyle}" Click="FilterButton_Click_1"/>
 
             <ListBox x:Name="FilterList"
-            Grid.Column="2"
-            Width="120"
-            Margin="3,0,0,0"
-            Visibility="Collapsed">
+             Width="120"
+             Margin="3,0,0,0"
+             Visibility="Collapsed"
+             SelectionChanged="FilterList_SelectionChanged">
                 <ListBoxItem Content="По имени"/>
                 <ListBoxItem Content="По дате"/>
-                <ListBoxItem Content="По размеру"/>
+                <ListBoxItem Content="По частоте запуска"/>
             </ListBox>
+            <Button x:Name="ResetFilterButton"
+            Content="Сбросить"
+            Width="80"
+            Height="35"
+            Margin="5,0,0,0"
+            Style="{StaticResource ModernButtonStyle}"
+            Click="ResetFilterButton_Click"/>
         </StackPanel>
-        <StackPanel  Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="5" x:Name="StackP1">
+        <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="DelApp"
+                    Content="Удалить приложение"
+                    Style="{StaticResource ModernButtonStyle}"
+                    Width="180"
+                    Height="35" Click="DeleteApp_Click"
+                />
+        </StackPanel>
 
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="Update"
-                    Content="Обновить"
-                    Width="100"
-                    Height="35"
-                    Style="{StaticResource ModernButtonStyle}" Click="Update_Click"/>
-        </StackPanel>
+        <UniformGrid x:Name="StackP1" 
+             Grid.Row="2" 
+             Grid.ColumnSpan="7" 
+             Columns="5" 
+             Rows="1"/>
         <StackPanel Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="7" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="AddApp"
                     Content="Добавить приложение"
@@ -104,5 +118,4 @@
                     />
         </StackPanel>
     </Grid>
-    
 </Window>

@@ -19,7 +19,6 @@ namespace quickapp
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool DeleteObject(IntPtr hObject);
 
-        // Получает иконку из .exe файла
         public static BitmapSource GetIconFromExe(string filePath)
         {
             if (!File.Exists(filePath))
@@ -38,7 +37,6 @@ namespace quickapp
             }
         }
 
-        // Преобразует Icon в BitmapSource
         private static BitmapSource ToBitmapSource(Icon icon)
         {
             using (Bitmap bitmap = icon.ToBitmap())
@@ -65,7 +63,6 @@ namespace quickapp
             }
         }
 
-        // Сохраняет BitmapSource во временный файл PNG
         public static string SaveIconToTemp(BitmapSource icon, string appName)
         {
             var encoder = new PngBitmapEncoder();
@@ -77,11 +74,10 @@ namespace quickapp
             {
                 encoder.Save(stream);
             }
-
             return tempPath;
+            
         }
 
-        // Загружает BitmapImage из файла
         public static BitmapImage LoadBitmapImage(string path)
         {
             if (!File.Exists(path))
@@ -97,7 +93,7 @@ namespace quickapp
                 bitmap.EndInit();
             }
 
-            bitmap.Freeze(); // Важно для работы в UI
+            bitmap.Freeze();
             return bitmap;
         }
     }
