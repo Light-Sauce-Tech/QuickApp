@@ -46,18 +46,17 @@
                        VerticalAlignment="Center"
                        Margin="8,0,0,0"/>
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel x:Name="StackOf" Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button  x:Name="oftexe1"
+                     Margin="10,0,10,0"
                      Width="50" Height="50"
                      Style="{StaticResource ModernButtonStyle}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button  x:Name="oftexe2"
+                     Margin="10,0,10,0"
                      Width="50" Height="50"
                      Style="{StaticResource ModernButtonStyle}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button  x:Name="oftexe3"
+                     Margin="10,0,10,0"
                      Width="50"
                      Height="50"
                      Style="{StaticResource ModernButtonStyle}"/>

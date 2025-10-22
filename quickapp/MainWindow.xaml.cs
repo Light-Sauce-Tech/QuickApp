@@ -160,40 +160,36 @@ namespace quickapp
                 .Take(3)
                 .ToList();
 
-            Button[] buttons = { oftexe1, oftexe2, oftexe3 };
-            for (int i = 0; i < buttons.Length; i++)
+            StackOf.Children.Clear();
+            for (int i = 0; i < apps.Count; i++)
             {
-                if (i < apps.Count)
+                var app = apps[i];
+                var button = new Button
                 {
-                    var app = apps[i];
-
-                    if (!string.IsNullOrEmpty(app.IconPath) && File.Exists(app.IconPath))
+                    Width = 50,
+                    Height = 50,
+                    Margin = new Thickness(5),
+                    Style = (Style)this.FindResource("ModernButtonStyle"),
+                    Tag = app
+                };
+                if (!string.IsNullOrEmpty(app.IconPath) && File.Exists(app.IconPath))
+                {
+                    button.Content = new Image
                     {
-                        buttons[i].Content = new Image
-                        {
-                            Source = new BitmapImage(new Uri(app.IconPath)),
-                            Width = 30,
-                            Height = 30
-                        };
-                    }
-                    else
-                    {
-                        buttons[i].Content = null;
-                    }
-
-                    ToolTipService.SetToolTip(buttons[i], app.AppName);
-
-                    buttons[i].Tag = app;
-                    buttons[i].Click -= FrequentApp_Click;
-                    buttons[i].Click += FrequentApp_Click;
+                        Source = new BitmapImage(new Uri(app.IconPath)),
+                        Width = 30,
+                        Height = 30,
+                    };
                 }
                 else
                 {
-                    buttons[i].Content = null;
-                    buttons[i].Tag = null;
-                    buttons[i].Click -= FrequentApp_Click;
-                    ToolTipService.SetToolTip(buttons[i], null);
+                    button.Content = null;
                 }
+
+                ToolTipService.SetToolTip(button, app.AppName);
+                button.Click += FrequentApp_Click;
+
+                StackOf.Children.Add(button);
             }
         }
         private void FrequentApp_Click(object sender, RoutedEventArgs e)
@@ -270,6 +266,7 @@ namespace quickapp
                     File.WriteAllText(JsonFilePath, JsonSerializer.Serialize(apps, options));
 
                     LoadApps();
+                    LoadFrequentApps();
 
                     DelApp.Content = "Удалить приложение";
                     DelApp.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(240, 248, 255));
@@ -289,6 +286,7 @@ namespace quickapp
                 DelApp.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(220, 80, 80));
 
                 StackP1.PreviewMouseLeftButtonDown += AppsWrapPanel_PreviewMouseLeftButtonDown;
+                
             }
             else
             {
