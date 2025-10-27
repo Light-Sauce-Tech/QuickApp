@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:quickapp"
         mc:Ignorable="d"
-        MinHeight="560" MinWidth="700" Height="560" Width="700"  WindowStyle="ToolWindow"
-        SizeChanged="MainWindow_SizeChanged" ShowInTaskbar="False" Closing="Window_Closing">
+        MinHeight="560" MinWidth="900" Height="560" Width="900"  WindowStyle="ToolWindow"
+        SizeChanged="MainWindow_SizeChanged" ShowInTaskbar="False" Closing="Window_Closing" Icon="/QuickApp.ico" Title="QuickApp">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -70,11 +70,12 @@
              Style="{StaticResource searh}"
              TextChanged="SearchTextBox_TextChanged"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button x:Name="FilterButton" 
             Content="Фильтр"
             Width="80"
             Height="35"
+            Margin="10,0,0,0"
             Style="{StaticResource ModernButtonStyle}" Click="FilterButton_Click_1"/>
 
             <ListBox x:Name="FilterList"
@@ -94,7 +95,15 @@
             Style="{StaticResource ModernButtonStyle}"
             Click="ResetFilterButton_Click"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AddFold"
+                    Content="Создать папку"
+                    Style="{StaticResource ModernButtonStyle}"
+                    Width="120"
+                    Height="35"
+                />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="DelApp"
                     Content="Удалить приложение"
                     Style="{StaticResource ModernButtonStyle}"
