@@ -61,7 +61,7 @@
                      Height="50"
                      Style="{StaticResource ModernButtonStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Column="5" Grid.ColumnSpan="6" VerticalAlignment="Center">
+        <StackPanel Grid.Column="5" Grid.ColumnSpan="5" VerticalAlignment="Center">
             <TextBox x:Name="SearchTextBox"
              Width="150" Height="30"
              BorderThickness="1"
@@ -70,7 +70,11 @@
              Style="{StaticResource searh}"
              TextChanged="SearchTextBox_TextChanged"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
+        <StackPanel Grid.Column="6" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Image Source="/ico.png"
+                   />
+        </StackPanel>
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button x:Name="FilterButton" 
             Content="Фильтр"
             Width="80"
@@ -100,7 +104,7 @@
                     Content="Создать папку"
                     Style="{StaticResource ModernButtonStyle}"
                     Width="120"
-                    Height="35"
+                    Height="35" Click="AddFold_Click"
                 />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
