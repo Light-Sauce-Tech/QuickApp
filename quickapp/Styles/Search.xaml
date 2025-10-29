@@ -7,8 +7,8 @@
                     <Setter.Value>
                         <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Center">
                             <VisualBrush.Visual>
-                                <TextBlock Text="Поиск..." 
-                                               Foreground="#AAAAAA"
+                                <TextBlock Text="Поиск..."              
+                                               Foreground="White"
                                                Margin="5,0,0,0"/>
                             </VisualBrush.Visual>
                         </VisualBrush>

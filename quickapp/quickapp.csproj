@@ -14,7 +14,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ico.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="QuickApp.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ico.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

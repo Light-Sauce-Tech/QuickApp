@@ -17,12 +17,14 @@ using System.Text.Json.Serialization;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.ComponentModel;
+using Brush = System.Windows.Media.Brush;
 
 
 namespace quickapp
 {
     public partial class MainWindow : Window
     {
+        private bool isWhite = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +45,7 @@ namespace quickapp
         private const int MinRows = 3; 
         private int CurrentColumns = 5;
 
+        private List<TextBlock> _appTexts = new List<TextBlock>();
         private void EnsureAutostart()
         {
             string appName = "QuickAppLauncher"; // Имя в реестре
@@ -120,9 +123,11 @@ namespace quickapp
                     }
                 };
 
+                Brush textColor = System.Windows.Media.Brushes.White;
                 TextBlock textBlock = new TextBlock
                 {
-                    Text = app.AppName,
+                    Text = app.AppName ,
+                    Foreground = textColor,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 12
                 };
@@ -134,6 +139,16 @@ namespace quickapp
 
             UpdateGridColumns();
         }
+
+        private void ChangeColorAppTexts(System.Windows.Media.Color color)
+        {
+
+            foreach (var item in _appTexts)
+            {
+                item.Foreground = new SolidColorBrush(color);
+            }
+        }
+
         private void SaveAppList(List<AppItem> apps)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
@@ -260,7 +275,12 @@ namespace quickapp
                         apps = JsonSerializer.Deserialize<List<AppItem>>(json);
                     }
 
+                    var app = apps?.Find(a => a.AppPath == appToRemove.AppPath);
+
+                    _appTexts.Remove(app.RefTextBlock);
+
                     apps.RemoveAll(a => a.AppPath == appToRemove.AppPath);
+
 
                     var options = new JsonSerializerOptions { WriteIndented = true };
                     File.WriteAllText(JsonFilePath, JsonSerializer.Serialize(apps, options));
@@ -410,6 +430,8 @@ namespace quickapp
                     FontSize = 12
                 };
 
+                _appTexts.Add(textBlock);
+
                 container.Children.Add(button);
                 container.Children.Add(textBlock);
                 StackP1.Children.Add(container);
@@ -444,7 +466,26 @@ namespace quickapp
 
             ShowAppsInGrid(filteredApps);
         }
-
+        private void aPicture_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            up.Background = new SolidColorBrush(isWhite ? Colors.Black : Colors.DarkGray);
+            grid.Background = new SolidColorBrush(isWhite ? Colors.DimGray : Colors.WhiteSmoke);
+            
+            System.Drawing.Color color;
+            if (isWhite)
+            {
+                
+                color = System.Drawing.Color.White;
+                
+            }
+            else
+            {
+                color = System.Drawing.Color.Black;
+            }
+            System.Windows.Media.Color newColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+            ChangeColorAppTexts(newColor);
+            isWhite = !isWhite;
+        }
         private void FilterButton_Click_1(object sender, RoutedEventArgs e)
         {
             FilterList.Visibility = FilterList.Visibility == Visibility.Visible
